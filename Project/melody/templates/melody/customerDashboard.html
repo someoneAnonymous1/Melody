@@ -1,0 +1,174 @@
+{% load static %}
+{% block headerinclude %}
+    <title>Melody</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- custom css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'melody/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'melody/css/table.css' %}">
+
+    <!-- css for datatable -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+    <link src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js">
+    <style>
+        .navbar-brand{ text-transform: uppercase; color: white; letter-spacing: 2.5px; font-size: 1.5rem; font-weight: bold; }
+    </style>
+{% endblock headerinclude %}
+
+        <!-- start of navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg shadow">
+            <div class="container">
+                <a class="navbar-brand" href="#">Melody</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav" style="margin-left: 150px;">
+                        <li class="nav-item active"><a class="nav-link" href="#">Customer Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Product Dashboard</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Username
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Account</a>
+                                <hr>
+                                <a class="dropdown-item" href="#">Log Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>     
+        </nav>
+        <!-- end of navbar -->
+
+        <!-- start of page content -->
+        <div class="container-space" style="width: 1400px; margin-left: 4%;">
+            <form id="form1" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %} <p align="right"><button type="submit" class="buttonAdd">Add Song</button></p>
+            </form>
+            <!-- <p><button type="button" class=""></button></p> -->
+            <table class="table table-hover" id="data-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact no.</th> 
+                        <th scope="col">Songs Published</th> <!--song id  -->
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">John Jefferson</th>
+                        <td>Sison</td>
+                        <td>Oct 18, 1999</td>
+                        <td>iamhere@gmail.com</td>
+                        <td>01234567890</td>
+                        <td>1,2,3,4</td>
+                        <td><a data-toggle="modal" href="#modalView" class="button"><i class="material-icons" style="color: black; font-size: 26px;">&#xe88f;</i></a>
+                            <a data-toggle="modal" href="#modalDelete" class="button"><i class="material-icons" style="color: red; font-size:28px;">&#xe92b;</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Therese</th>
+                        <td>Bolabola</td>
+                        <td>Mar 4, 2000</td>
+                        <td>iamhere@gmail.com</td>
+                        <td>01234567890</td>
+                        <td>1,2,3,4</td>
+                        <td><a data-toggle="modal" href="#modalView" class="button"><i class="material-icons" style="color: black; font-size: 26px;">&#xe88f;</i></a>
+                            <a data-toggle="modal" href="#modalDelete" class="button"><i class="material-icons" style="color: red; font-size:28px;">&#xe92b;</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>   
+        <!--end of page content -->
+
+        <!-- modal for View -->
+        <div class="modal fade" id="modalView" tabindex="-1" role="dialog"\>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header modal-view">
+                  <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Customer Information</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-outline-primary shadow">Update</button>
+                  <button type="button" class="btn btn-outline-secondary shadow" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end of modal for View -->
+
+        <!-- modal for Delete -->
+        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header modal-delete">
+                  <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Are you sure you want to delete this?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <!-- <label for="exampleInputEmail1">Product Name</label> -->
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Song Title">
+                            </div>
+                            <div class="form-group col">
+                                <!-- <label for="exampleInputEmail1">Date Registered</label> -->
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Date Registered">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="exampleInputEmail1">Product Name</label> -->
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Artist(s)">
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="exampleInputEmail1">Genre</label> -->
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Genre">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-outline-danger shadow">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary shadow" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end of modal for Delete -->
+        
+{% block footerinclude %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{% static 'melody/js/datatable.js' %}"></script>
+    <script type="text/javascript">
+    $('#data-table').on('click', 'tr', function () {
+        var name = $('td', this).eq(1).text();
+        
+        $('#modalView').modal("show");
+    });
+    </script>
+{% endblock footerinclude %}
